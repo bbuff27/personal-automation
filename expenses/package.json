@@ -1,0 +1,16 @@
+{
+  "name": "expenses",
+  "version": "0.1.0",
+  "description": "Process expenses from CSVs and push to personal expenses Google Sheet",
+  "main": "processExpenses.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bill Buff",
+  "license": "ISC",
+  "dependencies": {
+    "googleapis": "^112.0.0",
+    "inquirer": "^9.1.4",
+    "sqlite3": "^5.1.4"
+  }
+}
