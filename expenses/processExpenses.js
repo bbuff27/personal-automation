@@ -1,12 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const csv = require('csv-parser');
-
 require('dotenv').config();
-
-const isAmazonFile = (filename) => {
-  return filename.includes('Amazon');
-};
 
 const directoryPath = process.env.DOWNLOADS_PATH;
 
