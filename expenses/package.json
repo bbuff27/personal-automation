@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Process expenses from CSVs and push to personal expenses Google Sheet",
   "main": "processExpenses.js",
+  "type": "module",
   "scripts": {
     "start": "node processExpenses.js"
   },
