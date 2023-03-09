@@ -3,13 +3,9 @@ import path from 'path';
 import csv from 'csv-parser';
 import * as dotenv from 'dotenv';
 import readline from 'readline';
-import { categories } from './expenseCategories';
+import { categories } from './expenseCategories.js';
 
 dotenv.config();
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
 
 const directoryPath = process.env.DOWNLOADS_PATH;
 
@@ -33,15 +29,28 @@ fs.readdir(directoryPath, (err, files) => {
             amount,
             category,
           }
-          categorizeExpense(expense)
         })
-        .on('end', () => {
-          console.log(`Finished parsing ${file}`);
+        .on('data', (expense) => {
+          const rl = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout
+          });
+          let i = 1;
+          for (const [key, value] of Object.entries(expense)) {
+            console.log(`${i}. ${key}`);
+            for (const [childKey, childValue] of Object.entries(value)) {
+              console.log(`${i}.${Object.keys(value).indexOf(childKey) + 1}. ${childKey}: ${childValue}`);
+            }
+            i++;
+          }
+
+          rl.question('Enter your selection: ', (answer) => {
+            const selection = parseInt(answer, 10);
+            const selectedItem = Object.values(expense)[selection - 1];
+            console.log('You selected:', selectedItem);
+            rl.close();
+          });
         });
       }, categories)
-  console.log(expenseFiles)
+  // console.log(expenseFiles)
 });
-
-function categorizeExpense(expense) {
-  console.log(expense)
-}
