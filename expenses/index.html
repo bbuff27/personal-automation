@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Expense Tracker</title>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.0/papaparse.min.js"></script>
+  <script src="./env.js"></script>
+  <script src="./js/parseCsv.js"></script>
+  <script src="./js/index.js"></script>
+</head>
+<body>
+  <div x-data="expenses">
+    <template x-for="(expense, index) in parsedExpenses" :key="index">
+      <li x-text="expense">
+      </li>
+    </template>
+  </div>
+  <!-- <div x-data="expenses">
+    <h1>Expense Tracker</h1>
+    <ul>
+    <template x-for="(expense, index) in expenses" :key="index">
+      <li>
+      <p>Description: <span x-text="expense.description"></span></p>
+      <p>Amount: $<span x-text="expense.amount.toFixed(2)"></span></p>
+      <p>Category:
+        <select x-model="categories">
+        <option value="">-- Choose a parent category --</option>
+        <template x-for="(parentCategory, parentIndex) in Object.keys(categories)" :key="parentIndex">
+          <option x-text="parentCategory.name" :value="parentIndex"></option>
+        </template>
+        </select>
+        <select x-model="categories">
+        <option value="">-- Choose a subcategory --</option>
+        <template x-for="(childCategory, childIndex) in Object.keys(categories[category]) ? categories[expense.category.parent].children : []" :key="childIndex">
+          <option x-text="childCategory" :value="childCategory"></option>
+        </template>
+        </select>
+      </p>
+      </li>
+    </template>
+    </ul>
+    <button @click="saveCategories()">Save Categories</button>
+
+    <p>Total Expenses: $<span x-text="totalExpenses.toFixed(2)"></span></p>
+    <h2>Categories</h2>
+    <ul>
+    <template x-for="(parentCategory, parentIndex) in categories" :key="parentIndex">
+      <li>
+      <h3 x-text="parentCategory.name"></h3>
+      <ul>
+        <template x-for="(childCategory, childIndex) in parentCategory.children" :key="childIndex">
+        <li>
+          <p x-text="childCategory"></p>
+          <p>Total: $<span x-text="parentCategory.total[childIndex].toFixed(2)"></span></p>
+        </li>
+        </template>
+      </ul>
+      <p>Total: $<span x-text="parentCategory.total.reduce((sum, amount) => sum + amount, 0).toFixed(2)"></span></p>
+      </li>
+    </template>
+    </ul>
+  </div> -->
+</body>
+</html>

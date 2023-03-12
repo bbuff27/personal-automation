@@ -1,16 +1,22 @@
 {
   "name": "expenses",
-  "version": "0.1.0",
-  "description": "Process expenses from CSVs and push to personal expenses Google Sheet",
-  "main": "calculateExpenses.js",
-  "type": "module",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with Fastify-CLI.",
+  "main": "app.js",
   "scripts": {
-    "start": "node calculateExpenses.js"
+    "start": "fastify start -l info app.js",
+    "dev": "fastify start -w -l info -P app.js"
   },
-  "author": "Bill Buff",
+  "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fastify/autoload": "^5.0.0",
+    "@fastify/sensible": "^5.0.0",
     "csv-parser": "^3.0.0",
-    "dotenv": "^16.0.3"
+    "ejs": "^3.1.9",
+    "fastify": "^4.0.0",
+    "fastify-cli": "^5.7.1",
+    "fastify-plugin": "^4.0.0",
+    "point-of-view": "^6.3.0"
   }
 }
