@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Expense Tracker</title>
-  <link rel="stylesheet" href="../styles/viewExpenses.css">
+  <link rel="stylesheet" href="/styles/viewExpenses.css">
 <body>
   <h1>Expenses</h1>
   <% for (let i = 0; i < parsedExpenses.length; i++) { %>
@@ -31,43 +31,5 @@
       </ul>
     </div>
   <% } %>
-</body>
-</html>
-
-  <script>
-    const parentCategorySelect = document.getElementById('parent-category');
-    const childCategorySelect = document.getElementById('child-category');
-    const expensesList = document.getElementById('expenses-list');
-
-    parentCategorySelect.addEventListener('change', async (event) => {
-      const parentCategory = event.target.value;
-      childCategorySelect.disabled = true;
-
-      if (parentCategory === '') {
-        childCategorySelect.innerHTML = '<option value="">Select Child Category</option>';
-        childCategorySelect.disabled = true;
-        return;
-      }
-
-      const response = await fetch(`/categories/${parentCategory}/children`);
-      const categories = await response.json();
-
-      childCategorySelect.innerHTML = '<option value="">Select Child Category</option>';
-
-      if (categories.length === 0) {
-        childCategorySelect.disabled = true;
-        return;
-      }
-
-      childCategorySelect.disabled = false;
-
-      categories.forEach((category) => {
-        const option = document.createElement('option');
-        option.value = category.name;
-        option.textContent = category.name;
-        childCategorySelect.appendChild(option);
-      });
-    });
-  </script>
 </body>
 </html>
