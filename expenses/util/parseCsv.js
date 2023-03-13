@@ -1,37 +1,48 @@
-import csvParser from 'csv-parser';
-import fs from 'fs';
-import path from 'path';
+const csvParser = require('csv-parser');
+const fs = require('fs');
+const path = require('path');
 
-export const parseCsv = () => {
-  const directoryPath = env.downloadsPath;
+module.exports = function parseCsv() {
+  const directoryPath = process.env.DOWNLOADS_PATH;
 
-  fs.readdir(directoryPath, (err, files) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
+  return new Promise((resolve, reject) => {
+    fs.readdir(directoryPath, (err, files) => {
+      if (err) {
+        console.error(err);
+        reject(err);
+        return;
+      }
 
-    const calculatedExpenses = files
-      .filter(file => file.includes('_Expenses') && path.extname(file) === '.csv')
-      .reduce((acc, file) => {
-        const filePath = path.join(directoryPath, file);
-        const headers = ['description', 'amount', 'category'];
-        const csvStream = fs.createReadStream(filePath).pipe(csvParser({ headers }));
+      const results = [];
+      const promises = files
+        .filter(file => file.includes('_Expenses') && path.extname(file) === '.csv')
+        .map(file => {
+          const filePath = path.join(directoryPath, file);
+          const headers = ['description', 'amount', 'category'];
 
-        csvStream
-          .on('data', ({ description, amount, category }) => {
-            if(description !== 'Description') {
-              acc.concat({description, amount, category})
-            }
+          return new Promise((resolve, reject) => {
+            fs.createReadStream(filePath).pipe(csvParser({ headers }))
+              .on('data', ({ description, amount, category }) => {
+                if(description !== 'Description') {
+                  results.push({description, amount, category})
+                }
+              })
+              .on('error', (err) => {
+                console.error(err)
+                reject(err);
+              })
+              .on('end', () => {
+                resolve();
+              });
           })
-          .on('end', () => {
-            console.error(`Finished parsing ${file}`)
-          })
-          .on('error', () => {
-            console.error(err)
-          });
-      }, [])
-    return calculatedExpenses;
+        });
+
+      Promise.all(promises).then(() => {
+        resolve(results);
+      }).catch((err) => {
+        console.error(err);
+        reject(err);
+      });
+    });
   });
 }
-

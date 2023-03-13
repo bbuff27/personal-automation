@@ -1,4 +1,4 @@
-export const categories = {
+module.exports = {
   children: {
     braydenSports: {
       expenses: [],

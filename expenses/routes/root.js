@@ -1,17 +1,21 @@
-'use strict'
+const parseCsv = require('../util/parseCsv');
+const categories = require('../util/expenseCategories');
 
 module.exports = async function (fastify, opts) {
   fastify.get('/', async function (request, reply) {
+    const parsedExpenses = await parseCsv();
     const data = {
-      items: ['item 1', 'item 2', 'item 3']
-    };
+      categories,
+      parsedExpenses,
+    }
     return reply.view('./templates/viewExpenses.ejs', data);
   })
 
   fastify.post('/', async function (request, reply) {
     const data = {
-      items: ['item 1', 'item 2', 'item 3']
-    };
+      categories,
+      parsedExpenses: parseCsv()
+    }
     return reply.view('../templates/viewExpenses.ejs', data);
   });
 }

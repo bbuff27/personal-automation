@@ -4,8 +4,7 @@
   "description": "This project was bootstrapped with Fastify-CLI.",
   "main": "app.js",
   "scripts": {
-    "start": "fastify start -l info app.js",
-    "dev": "fastify start -w -l info -P app.js"
+    "start": "fastify start --options -w -l info -P app.js"
   },
   "author": "",
   "license": "ISC",

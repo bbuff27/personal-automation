@@ -3,13 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <title>Expense Tracker</title>
-</head>
+  <link rel="stylesheet" href="../styles/viewExpenses.css">
 <body>
   <h1>Expenses</h1>
-  <ul>
-    <% for (let i = 0; i < items.length; i++) { %>
-      <li><%= items[i] %></li>
-    <% } %>
-  </ul>
+  <% for (let i = 0; i < parsedExpenses.length; i++) { %>
+    <div class="expense-container">
+      <h4><%= parsedExpenses[i].description %></h5>
+      <ul>
+        <li><strong>Amount:</strong> $<%= parsedExpenses[i].amount %></li>
+        <li><strong>Merchant Category:</strong> $<%= parsedExpenses[i].category %></li>
+        <li class="category-selects">
+          <strong>Parent Category:</strong>
+          <select>
+            <% for (let j = 0; j < categories.length; j++) { %>
+              <option value="<%= categories[j].name %>"><%= categories[j].name %></option>
+            <% } %>
+          </select>
+          <strong>Child Category:</strong>
+          <select>
+            <% for (let j = 0; j < categories.length; j++) { %>
+              <% if (categories[j].name === parsedExpenses[i].category) { %>
+                <option value="<%= categories[j].name %>"><%= categories[j].name %></option>
+              <% } %>
+            <% } %>
+          </select>
+        </li>
+      </ul>
+    </div>
+  <% } %>
+</body>
+</html>
+
+  <script>
+    const parentCategorySelect = document.getElementById('parent-category');
+    const childCategorySelect = document.getElementById('child-category');
+    const expensesList = document.getElementById('expenses-list');
+
+    parentCategorySelect.addEventListener('change', async (event) => {
+      const parentCategory = event.target.value;
+      childCategorySelect.disabled = true;
+
+      if (parentCategory === '') {
+        childCategorySelect.innerHTML = '<option value="">Select Child Category</option>';
+        childCategorySelect.disabled = true;
+        return;
+      }
+
+      const response = await fetch(`/categories/${parentCategory}/children`);
+      const categories = await response.json();
+
+      childCategorySelect.innerHTML = '<option value="">Select Child Category</option>';
+
+      if (categories.length === 0) {
+        childCategorySelect.disabled = true;
+        return;
+      }
+
+      childCategorySelect.disabled = false;
+
+      categories.forEach((category) => {
+        const option = document.createElement('option');
+        option.value = category.name;
+        option.textContent = category.name;
+        childCategorySelect.appendChild(option);
+      });
+    });
+  </script>
 </body>
 </html>
