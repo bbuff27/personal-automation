@@ -32,11 +32,16 @@
       </ul>
     </div>
   <% } %>
+  <button id="submit-button">Submit Categories</button>
+
   <script>
     const categories = <%- JSON.stringify(categories) %>;
+    const parsedExpenses = <%- JSON.stringify(parsedExpenses) %>;
 
     const parentSelects = document.querySelectorAll('.expense-container .parent-category');
     const childSelects = document.querySelectorAll('.expense-container .child-category');
+    const submitButton = document.getElementById('submit-button');
+    const expenseContainer = document.querySelectorAll('.expense-container');
 
     // Add event listener to each parent category select element
     parentSelects.forEach((parentSelect, index) => {
@@ -50,6 +55,40 @@
         // Update the options of the corresponding child category select element
         childSelects[index].innerHTML = selectedChildren.map(child => `<option value="${child.name}">${child.name}</option>`).join('');
       });
+    });
+
+    // Add event listener to submit button
+    submitButton.addEventListener('click', async () => {
+      // Create an array to hold the selected categories for each expense
+      const selectedCategories = [];
+
+      // Loop through each expense container and get the selected category
+      for (let i = 0; i < parsedExpenses.length; i++) {
+        const parentSelect = parentSelects[i];
+        const childSelect = childSelects[i];
+
+        const parentCategory = parentSelect.value;
+        const childCategory = childSelect.value;
+
+        // Add the selected category to the array
+        selectedCategories.push({
+          expenseIndex: i,
+          parentCategory,
+          childCategory,
+          amount: parsedExpenses[i].amount,
+        });
+      }
+
+      console.log(selectedCategories)
+
+      // Send a POST request to the server with the selected categories
+      // await fetch('/', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(selectedCategories),
+      // });
     });
   </script>
 </body>
