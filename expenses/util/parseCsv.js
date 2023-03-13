@@ -24,7 +24,11 @@ module.exports = function parseCsv() {
             fs.createReadStream(filePath).pipe(csvParser({ headers }))
               .on('data', ({ description, amount, category }) => {
                 if(description !== 'Description') {
-                  results.push({description, amount, category})
+                  results.push({
+                    description,
+                    amount: amount.replace('$', ''),
+                    category
+                  })
                 }
               })
               .on('error', (err) => {

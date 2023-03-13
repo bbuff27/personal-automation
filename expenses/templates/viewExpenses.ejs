@@ -8,7 +8,7 @@
   <h1>Expenses</h1>
   <% for (let i = 0; i < parsedExpenses.length; i++) { %>
     <div class="expense-container">
-      <h4><%= parsedExpenses[i].description %></h5>
+      <h4><%= parsedExpenses[i].description %></h4>
       <ul>
         <li><strong>Amount:</strong> $<%= parsedExpenses[i].amount %></li>
         <li><strong>Merchant Category:</strong> <%= parsedExpenses[i].category %></li>
@@ -16,14 +16,14 @@
           <strong>Parent Category:</strong>
           <select>
             <% for (let j = 0; j < categories.length; j++) { %>
-              <option value="<%= categories[j].name %>"><%= categories[j].name %></option>
+              <option value="<%= categories[j].group %>"><%= categories[j].group %></option>
             <% } %>
           </select>
           <strong>Child Category:</strong>
           <select>
             <% for (let j = 0; j < categories.length; j++) { %>
-              <% if (categories[j].name === parsedExpenses[i].category) { %>
-                <option value="<%= categories[j].name %>"><%= categories[j].name %></option>
+              <% if (categories[j].group === parsedExpenses[i].category) { %>
+                <option value="<%= categories[j] %>"><%= categories[j] %></option>
               <% } %>
             <% } %>
           </select>
