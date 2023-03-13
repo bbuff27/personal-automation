@@ -13,9 +13,8 @@ module.exports = async function (fastify, opts) {
 
   fastify.post('/', async function (request, reply) {
     const data = {
-      categories,
-      parsedExpenses: parseCsv()
+      expenses: request.body,
     }
-    return reply.view('../templates/viewExpenses.ejs', data);
+    return reply.view('../templates/viewCategorizedExpenses.ejs', data);
   });
 }
