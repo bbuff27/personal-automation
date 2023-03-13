@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Expense Tracker</title>
-  <link rel="stylesheet" href="/styles/viewExpenses.css">
+  <link rel="stylesheet" href="/public/index.css">
 <body>
-  <h1>Expenses</h1>
   <% for (let i = 0; i < parsedExpenses.length; i++) { %>
     <div class="expense-container">
       <h4><%= parsedExpenses[i].description %></h4>
@@ -14,22 +13,44 @@
         <li><strong>Merchant Category:</strong> <%= parsedExpenses[i].category %></li>
         <li class="category-selects">
           <strong>Parent Category:</strong>
-          <select>
+          <select class="parent-category">
             <% for (let j = 0; j < categories.length; j++) { %>
-              <option value="<%= categories[j].group %>"><%= categories[j].group %></option>
+              <option value="<%= categories[j].group %>">
+                <%= categories[j].group %>
+              </option>
             <% } %>
           </select>
           <strong>Child Category:</strong>
-          <select>
-            <% for (let j = 0; j < categories.length; j++) { %>
-              <% if (categories[j].group === parsedExpenses[i].category) { %>
-                <option value="<%= categories[j] %>"><%= categories[j] %></option>
-              <% } %>
+          <select class="child-category">
+            <% for (let j = 0; j < categories[0].children.length; j++) { %>
+              <option value="<%= categories[0].children[j].name %>">
+                <%= categories[0].children[j].name %>
+              </option>
             <% } %>
           </select>
         </li>
       </ul>
     </div>
   <% } %>
+  <script>
+    const categories = <%- JSON.stringify(categories) %>;
+
+    const parentSelects = document.querySelectorAll('.expense-container .parent-category');
+    const childSelects = document.querySelectorAll('.expense-container .child-category');
+
+    // Add event listener to each parent category select element
+    parentSelects.forEach((parentSelect, index) => {
+      parentSelect.addEventListener('change', () => {
+        // Get the selected parent category
+        const selectedParentCategory = parentSelect.value;
+
+        // Filter the categories object to only include the children of the selected parent category
+        const selectedChildren = categories.find(category => category.group === selectedParentCategory).children;
+
+        // Update the options of the corresponding child category select element
+        childSelects[index].innerHTML = selectedChildren.map(child => `<option value="${child.name}">${child.name}</option>`).join('');
+      });
+    });
+  </script>
 </body>
 </html>
