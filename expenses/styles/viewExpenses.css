@@ -1,45 +1,76 @@
+/* Main container */
 body {
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-}
-
-h1 {
-  text-align: center;
-}
-
-.expense-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px auto;
+  background-color: #fff;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  padding: 2rem;
+  box-sizing: border-box;
   max-width: 800px;
+  margin: 0 auto;
 }
 
-.expense-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
+/* Expense container */
+.expense-container {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  box-sizing: border-box;
   background-color: #f5f5f5;
-  border-radius: 5px;
-  margin-bottom: 10px;
 }
 
-.expense-description {
-  flex: 1;
+/* Expense title */
+.expense-container h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #333;
 }
 
-.expense-amount {
-  margin-right: 10px;
-}
-
-.category-selects {
+/* Expense details */
+.expense-container ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  flex-wrap: wrap;
 }
 
+/* Expense details - list items */
+.expense-container li {
+  margin-right: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Expense details - list item label */
+.expense-container li strong {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+/* Category selects */
+.category-selects {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Category selects - labels */
+.category-selects strong {
+  margin-right: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Category selects - select boxes */
 .category-selects select {
-  margin-bottom: 5px;
+  margin-right: 1rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  line-height: 1.5;
+  cursor: pointer;
 }
