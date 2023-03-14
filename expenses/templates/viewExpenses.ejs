@@ -82,13 +82,13 @@
       console.log(selectedCategories)
 
       // Send a POST request to the server with the selected categories
-      // await fetch('/', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(selectedCategories),
-      // });
+      await fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(selectedCategories),
+      });
     });
   </script>
 </body>

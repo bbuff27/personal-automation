@@ -23,7 +23,7 @@ module.exports = function parseCsv() {
           return new Promise((resolve, reject) => {
             fs.createReadStream(filePath).pipe(csvParser({ headers }))
               .on('data', ({ description, amount, category }) => {
-                if(description !== 'Description') {
+                if(description !== 'Description' && amount > 0.00) {
                   results.push({
                     description,
                     amount: amount.replace('$', ''),

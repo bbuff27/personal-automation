@@ -12,9 +12,14 @@ module.exports = async function (fastify, opts) {
   })
 
   fastify.post('/', async function (request, reply) {
-    const data = {
-      expenses: request.body,
-    }
-    return reply.view('../templates/viewCategorizedExpenses.ejs', data);
+    const mutableCategories = categories;
+    request.body.forEach(expense => {
+      const parentIndex = categories.findIndex(category => category.group === expense.parentCategory);
+      const matchingGroup = mutableCategories[parentIndex];
+      const childIndex = categories[parentIndex].children.findIndex(category => category.name === expense.childCategory);
+      matchingGroup.children[childIndex].expenseTotal += +expense.amount;
+    })
+
+    return mutableCategories;
   });
 }
