@@ -1,23 +1,21 @@
-# Getting Started with [Fastify-CLI](https://www.npmjs.com/package/fastify-cli)
+# Getting Started
+
 This project was bootstrapped with Fastify-CLI.
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+1. Download CSVs from expense merchants to `DOWNLOADS_PATH` env
+    - Name files as `<merchant>_Expenses.csv`
+1. Remove all columns that aren't the description, amount, or category
+    - Be sure the columns are ordered in exact order: `Description, Amount, Category`
+1. Export to CSV from Numbers
+    - Save under the same name mentioned above
+1. In the project directory, run `npm start`
 
-### `npm run dev`
+## How to Use
 
-To start the app in dev mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### `npm start`
-
-For production mode
-
-### `npm run test`
-
-Run the test cases.
-
-## Learn More
-
-To learn Fastify, check out the [Fastify documentation](https://www.fastify.io/docs/latest/).
+1. Open [http://localhost:3000](http://localhost:3000) to view expenses list in browser
+1. Open Network tab so view response when submitting
+1. Select desires categories for each expense and click Submit
+1. Copy response somewhere to save `categories` object
+1. Copy results into Google Sheet
