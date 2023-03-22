@@ -4,11 +4,12 @@
   "description": "",
   "main": "daily-dad-favs.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node daily-dad-favs.js"
   },
   "author": "Bill Buff",
   "license": "ISC",
   "dependencies": {
+    "@notionhq/client": "^2.2.3",
     "dotenv": "^16.0.3",
     "protonmail-api": "^2.2.0"
   }
