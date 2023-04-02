@@ -9,6 +9,7 @@
     <div class="expense-container">
       <h4><%= parsedExpenses[i].description %></h4>
       <ul>
+        <li><strong>Transaction Date:</strong> <%= parsedExpenses[i].date %></li>
         <li><strong>Amount:</strong> $<%= parsedExpenses[i].amount %></li>
         <li><strong>Merchant Category:</strong> <%= parsedExpenses[i].category %></li>
         <li class="category-selects">

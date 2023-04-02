@@ -18,16 +18,17 @@ module.exports = function parseCsv() {
         .filter(file => file.includes('_Expenses') && path.extname(file) === '.csv')
         .map(file => {
           const filePath = path.join(directoryPath, file);
-          const headers = ['description', 'amount', 'category'];
+          const headers = ['date', 'description', 'amount', 'category'];
 
           return new Promise((resolve, reject) => {
             fs.createReadStream(filePath).pipe(csvParser({ headers }))
-              .on('data', ({ description, amount, category }) => {
+              .on('data', ({ date, description, amount, category }) => {
                 if(description !== 'Description' &&
                     amount > 0.00 &&
                     !description.includes('AMZN.COM/BILL') &&
                     !description.includes('Discover Credit Card')) {
                   results.push({
+                    date,
                     description,
                     amount: amount.replace('$', ''),
                     category
