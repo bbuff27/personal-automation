@@ -1,3 +1,4 @@
+const fs = require('fs');
 const parseCsv = require('../util/parseCsv');
 const categories = require('../util/expenseCategories');
 
@@ -19,6 +20,11 @@ module.exports = async function (fastify, opts) {
       const childIndex = categories[parentIndex].children.findIndex(category => category.name === expense.childCategory);
       matchingGroup.children[childIndex].expenseTotal += +expense.amount;
     })
+
+    fs.writeFile('./expenses.json', JSON.stringify(mutableCategories), (err) => {
+      if (err) throw err;
+      console.log('The file has been saved!');
+    });
 
     return mutableCategories;
   });
