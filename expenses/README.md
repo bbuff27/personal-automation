@@ -16,5 +16,5 @@ This project was bootstrapped with Fastify-CLI.
 
 1. Open [http://localhost:3000](http://localhost:3000) to view expenses list in browser
 1. Select desired categories for each expense and click Submit
-1. Run `cat expenses.json | jq '.'` in the terminal where ran the app
+1. Run `npm run print-expenses` in the terminal where ran the app
 1. Copy results into Google Sheet
