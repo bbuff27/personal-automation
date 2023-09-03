@@ -3,12 +3,7 @@ module.exports = [
     group: 'Children',
     children: [
       {
-        name: 'Brayden Sports',
-        expenses: [],
-        expenseTotal: 0,
-      },
-      {
-        name: 'Arya Sports',
+        name: 'Sports',
         expenses: [],
         expenseTotal: 0,
       },
