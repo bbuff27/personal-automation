@@ -68,6 +68,11 @@ module.exports = [
         expenseTotal: 0,
       },
       {
+        name: 'Credit Card Interest',
+        expenses: [],
+        expenseTotal: 0,
+      },
+      {
         name: 'Other',
         expenses: [],
         expenseTotal: 0,
