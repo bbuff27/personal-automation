@@ -24,7 +24,6 @@ module.exports = function parseCsv() {
             fs.createReadStream(filePath).pipe(csvParser({ headers }))
               .on('data', ({ date, description, amount, category }) => {
                 if(description !== 'Description' &&
-                    amount > 0.00 &&
                     !description.includes('AMZN.COM/BILL') &&
                     !description.includes('Discover Credit Card')) {
                   results.push({
