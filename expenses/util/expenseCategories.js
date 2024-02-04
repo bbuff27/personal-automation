@@ -213,6 +213,11 @@ module.exports = [
         expenseTotal: 0,
       },
       {
+        name: 'Longmont Dairy',
+        expenses: [],
+        expenseTotal: 0,
+      },
+      {
         name: 'Other',
         expenses: [],
         expenseTotal: 0,
