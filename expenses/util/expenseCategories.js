@@ -370,6 +370,11 @@ module.exports = [
         expenseTotal: 0,
       },
       {
+        name: 'Care',
+        expenses: [],
+        expenseTotal: 0,
+      },
+      {
         name: 'Other',
         expenses: [],
         expenseTotal: 0,
