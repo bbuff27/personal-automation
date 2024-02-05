@@ -19,6 +19,11 @@ module.exports = async function (fastify, opts) {
       const matchingGroup = mutableCategories[parentIndex];
       const childIndex = categories[parentIndex].children.findIndex(category => category.name === expense.childCategory);
       matchingGroup.children[childIndex].expenseTotal += +expense.amount;
+      matchingGroup.children[childIndex].expenses.push({
+        date: expense.date,
+        amount: expense.amount,
+        description: expense.description,
+      });
     })
 
     fs.writeFile('./expenses.json', JSON.stringify(mutableCategories), (err) => {
