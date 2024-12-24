@@ -1,0 +1,13 @@
+{
+  "name": "allowance-calculation",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx functions-framework --target=calculateAllowance"
+  },
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.4.4",
+    "@notionhq/client": "^2.2.15"
+  }
+}
