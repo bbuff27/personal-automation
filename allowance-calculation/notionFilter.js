@@ -1,4 +1,4 @@
-export const notionFilter = {
+export const checkboxTrueFilter = {
   or: [
     {
       property: "SUN",
@@ -43,4 +43,28 @@ export const notionFilter = {
       },
     },
   ],
+};
+
+export const checkboxFalseFilter = {
+  SUN: {
+    checkbox: false,
+  },
+  MON: {
+    checkbox: false,
+  },
+  TUE: {
+    checkbox: false,
+  },
+  WED: {
+    checkbox: false,
+  },
+  THU: {
+    checkbox: false,
+  },
+  FRI: {
+    checkbox: false,
+  },
+  SAT: {
+    checkbox: false,
+  },
 };
